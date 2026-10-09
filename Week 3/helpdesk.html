@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Help desk form">
+    <meta name="keywords" content="helpdesk, swinburne">
+    <meta name="author" content="Nguyenquocan-105550652">
+    <title>CWA Help Desk Appointment</title>
+</head>
+<body>
+    <a 
+        href="https://www.swinburne.edu.au/"
+        target="_blank">
+        <img src="scr/swin_logo.png" alt="logo">
+    </a>
+
+    <h1>CWA Help Desk Appointment</h1>
+    <p>The Help Desk is allocated in ATC600. Open 10:30 to 19:00 Monday to Friday</p>
+    <p>Check Blackboard for when CWA tutor will be there.</p>
+
+    <form action="submit.php" method="post">
+        <fieldset>
+            <legend>Student details</legend>
+            <label for="id"> Student ID:</label>
+            <input type="text" id="id" name="id" pattern="\d{7,10}" title="Please fill from 7 to 10 digits" required>
+            <br>
+            <label for="given_name">Given Name</label>
+            <input type="text" id="given_name" name="given_name" maxlength="15", pattern="[A-Za-z]+" title="abc" required>
+            <label for="family_name">Family Name</label>
+            <input type="text" id="family_name" name="family_name" maxlength="15", pattern="[A-Za-z]+" title="abc" required>
+
+        </fieldset>
+
+        <fieldset>
+            <legend>Your unit</legend>
+            <input type="radio" id="cos10011" name="unit" value="cos10011">
+            <label for="cos10011">COS10011</label>
+            <input type="radio" id="cos60004" name="unit" value="cos60004">
+            <label for="cos60004">COS60004</label>
+            <input type="radio" id="cos60007" name="unit" value="cos60007" required>
+            <label for="cos60007">COS60007</label>
+            <br>
+            <br>
+            <label for="tutor">Your Tutor</label>
+            <select name="tutor" id="tutor">
+                <option value="blank">Please Select</option>
+                <option value="tutor_a">Tutor A</option>
+                <option value="tutor_b">Tutor B</option>
+                <option value="tutor_c">Tutor C</option>
+            </select>
+        </fieldset>
+
+        <fieldset>
+            <legend>Issue</legend>
+            <label name="html">HTML</label>
+            <input type="checkbox" name="issue" id="html" checked>
+            <label name="css">CSS</label>
+            <input type="checkbox" name="issue" id="css">
+            <label name="javascript">JavaScript</label>
+            <input type="checkbox" name="issue" id="javascript">
+            <label name="php">PHP</label>
+            <input type="checkbox" name="issue" id="PHP">
+            <label name="mysql">MySQL</label>
+            <input type="checkbox" name="issue" id="mysql">
+            <br>
+            <label for="des">Description of Issue</label>
+            <br>
+            <textarea name="des" id="des" rows="4" cols="30" placeholder="Write description of your problem here ..." required></textarea>
+        </fieldset>
+
+        <fieldset>
+            <legend>Prefered Date / Time (default) </legend>
+            <label for="date">Date</label>
+            <input type="date" name="date" id="date" required>
+            <br>
+            <label for="time">Time</label>
+            <input type="time" name="time" id="time" required>
+        </fieldset>
+
+
+        <fieldset>
+            <legend>Prefered Date / Time (text) </legend>
+            <label for="date">Date</label>
+            <input type="text" name="date" id="date" placeholder="dd/mm/yyyy" pattern="\d{2}/\d{2}/\d{4}" required>
+            <br>
+            <label for="time">Time</label>
+            <input type="text" name="time" id="time" placeholder="00:00" pattern="\d{2}:\d{2}" required>
+        </fieldset> 
+
+        <input type="submit" id=book value="Book" >
+        <input type="reset" id="reset" value="Reset">
+
+    </form>
+
+    
+    
+
+</body>
+</html>
