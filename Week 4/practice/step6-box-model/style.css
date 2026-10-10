@@ -1,0 +1,30 @@
+/* ============ Step 6 – Box Model ============ */
+
+/* Phần có sẵn, ĐỪNG SỬA: vùng sọc để bạn NHÌN THẤY margin */
+.area {
+  background: repeating-linear-gradient(45deg, #f3f3f3 0 8px, #e2e2e2 8px 16px);
+  border: 1px dashed #aaa;
+  margin-bottom: 20px;
+  overflow: auto;
+}
+.box, .box2, .box3 {
+  background-color: #cfe8ff;
+}
+.box2, .box3 {
+  display: inline-block;
+  border: 2px solid #0b5cad;
+}
+
+
+/* TODO 1: .box
+   - width 200px
+   - padding 20px
+   - border 5px solid green
+   - margin 30px                 */
+
+
+/* TODO 2: .box2 → MỘT dòng padding: trên/dưới 10px, trái/phải 40px */
+
+
+/* TODO 3: .box3 → chỉ đẩy sang phải bằng margin-left 100px */
+

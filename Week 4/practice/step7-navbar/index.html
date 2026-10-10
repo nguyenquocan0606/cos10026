@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Step 7 – Horizontal Navbar</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Chỉ sửa style.css -->
+
+  <nav>
+    <ul class="nav">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <h1>Bài tổng hợp: thanh menu ngang</h1>
+  <p>Hiện tại menu đang là danh sách dọc có dấu chấm. Hãy biến nó thành menu ngang!</p>
+
+
+  <!-- ===== Bộ chấm tự động, KHÔNG cần sửa phần dưới ===== -->
+  <script src="../checker.js"></script>
+  <script>
+    setupChecker({
+      title: 'Step 7 – Navbar (tổng hợp)',
+      theory: `
+        <p><b>Descendant selector</b>: dấu cách nghĩa là "nằm bên trong"</p>
+        <pre>ul.nav li     → các li NẰM TRONG ul có class nav
+ul.nav li a   → các a nằm trong li nằm trong ul.nav
+nav ul        → các ul nằm trong thẻ &lt;nav&gt;</pre>
+        <p>⚠️ <code>ul.nav</code> (dính liền) = thẻ ul CÓ class nav.<br>
+        <code>ul .nav</code> (có dấu cách) = phần tử có class nav NẰM TRONG ul. Hai cái khác nhau!</p>
+        <p><b>Công thức menu ngang:</b></p>
+        <pre>list-style-type: none;  → bỏ dấu chấm
+display: inline;        → li nằm ngang trên 1 dòng
+text-decoration: none;  → bỏ gạch chân link</pre>
+        <p>Mặc định <code>li</code> là <b>block</b> (mỗi cái một dòng). <code>inline</code> cho chúng nằm cạnh nhau như chữ.</p>`,
+      tests: [
+        { task: '<code>ul.nav</code>: bỏ dấu chấm đầu dòng',
+          check: cssIs('ul.nav', 'listStyleType', 'none') },
+        { task: '<code>ul.nav</code>: padding 0 và margin 0',
+          check: all(cssIs('ul.nav', 'paddingLeft', '0px'), cssIs('ul.nav', 'marginTop', '0px')),
+          hint: 'Mặc định ul có padding-left 40px (chỗ chứa dấu chấm), nên phải xoá đi.' },
+        { task: '<code>li</code>: hiển thị ngang (<b>inline</b>) và cách nhau margin-right <b>20px</b>',
+          check: all(cssIs('ul.nav li', 'display', 'inline'), cssIs('ul.nav li', 'marginRight', '20px')),
+          hint: '<code>ul.nav li { display: inline; margin-right: 20px; }</code>' },
+        { task: '<code>a</code>: bỏ gạch chân, màu <b>#007BFF</b>, chữ đậm',
+          check: all(cssIs('ul.nav li a', 'textDecorationLine', 'none'), cssIs('ul.nav li a', 'color', '#007BFF'), cssIs('ul.nav li a', 'fontWeight', '700')) },
+        { task: 'Ôn Step 4 và 6: thanh <code>nav</code> có nền <b>#222</b> và padding <b>15px</b>',
+          check: all(cssIs('nav', 'backgroundColor', '#222'), cssIs('nav', 'paddingTop', '15px')) },
+        { manual: true,
+          task: 'Ôn Step 4: di chuột vào link thì chữ đổi sang <b>white</b>',
+          hint: '<code>ul.nav li a:hover { color: white; }</code>' },
+        { manual: true,
+          task: 'Thử thách: tài liệu ghi <code>nav ul</code> và <code>ul.nav</code> có thể thay nhau. Trong HTML này cả hai đều chọn đúng thẻ ul. Nếu xoá thẻ &lt;nav&gt; khỏi HTML thì cái nào hết tác dụng?',
+          hint: '<code>nav ul</code> hết tác dụng vì nó cần ul nằm TRONG thẻ nav. <code>ul.nav</code> vẫn chạy vì chỉ cần class.' }
+      ],
+      next: null
+    });
+  </script>
+</body>
+</html>

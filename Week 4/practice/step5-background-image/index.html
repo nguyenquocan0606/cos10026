@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Step 5 – Background Image</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Chỉ sửa style.css. Ảnh có sẵn trong thư mục images/ -->
+
+  <h1>Ảnh nền với CSS</h1>
+
+  <h2>1. Ảnh nền phủ kín + căn giữa</h2>
+  <div class="hero"></div>
+
+  <h2>2. Lặp lại (repeat), mặc định</h2>
+  <div class="tiles box"></div>
+
+  <h2>3. Không lặp + đổi kích thước</h2>
+  <div class="no-repeat box"></div>
+
+  <h2>4. Chỉ lặp theo chiều ngang</h2>
+  <div class="repeat-x box"></div>
+
+
+  <!-- ===== Bộ chấm tự động, KHÔNG cần sửa phần dưới ===== -->
+  <script src="../checker.js"></script>
+  <script>
+    setupChecker({
+      title: 'Step 5 – Background Image',
+      theory: `
+        <p><b>Cú pháp:</b> đường dẫn tính <b>từ file CSS</b></p>
+        <pre>background-image: url('images/landscape.svg');</pre>
+        <p><b>background-size</b></p>
+        <pre>cover        → phủ kín khung (có thể bị cắt)
+100px 100px  → rộng 100, cao 100</pre>
+        <p><b>background-position</b>: <code>center</code>, <code>top right</code>, hoặc số px / %</p>
+        <p><b>background-repeat</b></p>
+        <pre>repeat     → lặp cả 2 chiều (MẶC ĐỊNH)
+no-repeat  → không lặp
+repeat-x   → chỉ lặp ngang
+repeat-y   → chỉ lặp dọc</pre>
+        <p>⚠️ Thẻ div rỗng có chiều cao bằng 0, nên phải đặt <code>height</code> thì mới thấy ảnh nền!</p>`,
+      tests: [
+        { task: '<code>.hero</code> có ảnh nền <code>images/landscape.svg</code>',
+          check: cssHas('.hero', 'backgroundImage', 'landscape.svg'),
+          hint: '<code>background-image: url(\'images/landscape.svg\');</code>' },
+        { task: '<code>.hero</code> cao <b>300px</b>',
+          check: cssIs('.hero', 'height', '300px') },
+        { task: '<code>.hero</code> ảnh phủ kín (<b>cover</b>) và căn giữa (<b>center</b>)',
+          check: all(cssIs('.hero', 'backgroundSize', 'cover'), cssIs('.hero', 'backgroundPosition', '50% 50%')),
+          hint: 'Trình duyệt hiển thị center thành "50% 50%". Thu nhỏ cửa sổ, chữ CENTER phải luôn nằm giữa.' },
+        { task: '<code>.tiles</code> có ảnh nền <code>images/tile.svg</code> (để lặp mặc định)',
+          check: all(cssHas('.tiles', 'backgroundImage', 'tile.svg'), cssIs('.tiles', 'backgroundRepeat', 'repeat')) },
+        { task: '<code>.no-repeat</code>: ảnh tile.svg, <b>no-repeat</b>, size <b>100px 100px</b>',
+          check: all(cssHas('.no-repeat', 'backgroundImage', 'tile.svg'), cssIs('.no-repeat', 'backgroundRepeat', 'no-repeat'), cssIs('.no-repeat', 'backgroundSize', '100px 100px')) },
+        { task: '<code>.repeat-x</code>: ảnh tile.svg, chỉ lặp ngang (<b>repeat-x</b>)',
+          check: all(cssHas('.repeat-x', 'backgroundImage', 'tile.svg'), cssIs('.repeat-x', 'backgroundRepeat', 'repeat-x')) },
+        { manual: true,
+          task: 'Thử: xoá dòng <code>height</code> của .hero rồi reload. Chuyện gì xảy ra?',
+          hint: 'Ảnh biến mất, vì div rỗng cao 0px. Thử xong nhớ thêm lại.' },
+        { manual: true,
+          task: 'Bonus: cho cả trang (<code>body</code>) dùng landscape.svg làm nền full màn hình như ví dụ 5 trong tài liệu',
+          hint: 'background-size: cover; background-position: center; height: 100vh; margin: 0;' }
+      ],
+      next: '../step6-box-model/index.html'
+    });
+  </script>
+</body>
+</html>

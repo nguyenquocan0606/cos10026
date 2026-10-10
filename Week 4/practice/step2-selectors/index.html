@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Step 2 – CSS Selectors</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Bước này bạn KHÔNG cần sửa file HTML, chỉ sửa style.css.
+       Hãy đọc kỹ HTML dưới đây để biết thẻ nào có class/id gì. -->
+
+  <h1>CSS Selectors</h1>
+
+  <p>Đoạn văn thường (không có class, không có id)</p>
+
+  <p class="highlight">Đoạn văn có class="highlight"</p>
+
+  <p id="special">Đoạn văn có id="special"</p>
+
+  <div class="highlight">Một thẻ div cũng có class="highlight"</div>
+
+  <p>
+    <a href="https://example.com/page">Link tới example.com</a> |
+    <a href="https://google.com">Link tới google.com</a>
+  </p>
+
+
+  <!-- ===== Bộ chấm tự động, KHÔNG cần sửa phần dưới ===== -->
+  <script src="../checker.js"></script>
+  <script>
+    setupChecker({
+      title: 'Step 2 – Selectors',
+      theory: `
+        <p>Selector dùng để <b>chọn</b> phần tử nào sẽ được áp CSS:</p>
+        <pre>*                 → TẤT CẢ phần tử
+p                 → mọi thẻ &lt;p&gt;          (type)
+.highlight        → mọi thẻ có class="highlight"
+#special          → thẻ có id="special" (id là duy nhất)
+a[href*="abc"]    → thẻ &lt;a&gt; có href CHỨA "abc"</pre>
+        <p>🔑 Mẹo nhớ: <b>.</b> chấm = class (dùng nhiều lần), <b>#</b> thăng = id (chỉ một).</p>
+        <p>Đơn vị <code>em</code>: <code>2em</code> = 2 lần cỡ chữ mặc định (16px), tức là 32px.</p>`,
+      tests: [
+        { task: 'Dùng <b>universal selector</b> <code>*</code> để xoá margin của mọi phần tử (margin: 0)',
+          check: all(cssIs('h1', 'marginTop', '0px'), cssIs('body', 'marginTop', '0px')),
+          hint: '<code>* { margin: 0; }</code>, kiểm tra trên cả h1 và body' },
+        { task: 'Dùng <b>type selector</b>: mọi thẻ <code>p</code> có màu chữ <b>darkblue</b>',
+          check: cssIs('p', 'color', 'darkblue'),
+          hint: '<code>p { color: darkblue; }</code>' },
+        { task: 'Dùng <b>class selector</b>: mọi phần tử có class <code>highlight</code> có nền <b>yellow</b>',
+          check: all(cssIs('p.highlight', 'backgroundColor', 'yellow'), cssIs('div.highlight', 'backgroundColor', 'yellow')),
+          hint: 'Nhớ dấu chấm: <code>.highlight { background-color: yellow; }</code>. Cả p và div đều phải vàng.' },
+        { task: 'Dùng <b>id selector</b>: phần tử <code>#special</code> có font-size <b>2em</b>',
+          check: cssIs('#special', 'fontSize', '32px'),
+          hint: '<code>#special { font-size: 2em; }</code>. Trình duyệt sẽ quy đổi thành 32px.' },
+        { task: 'Dùng <b>attribute selector</b>: link có href chứa <code>example.com</code> màu <b>red</b> và <b>bold</b>',
+          check: all(cssIs('a[href*="example.com"]', 'color', 'red'), cssIs('a[href*="example.com"]', 'fontWeight', '700')),
+          hint: '<code>a[href*="example.com"] { color: red; font-weight: bold; }</code>' },
+        { task: 'Link google.com KHÔNG được đỏ (chứng tỏ bạn chọn đúng, không chọn nhầm mọi thẻ a)',
+          check: all(cssIs('a[href*="example.com"]', 'color', 'red'), cssNot('a[href*="google.com"]', 'color', 'red')),
+          hint: 'Đừng viết <code>a { color: red; }</code> vì nó sẽ chọn TẤT CẢ link.' },
+        { manual: true,
+          task: 'Câu hỏi: đoạn "id=special" là thẻ p, vậy nó có màu darkblue không? Vì sao?',
+          hint: 'Có. #special chỉ đổi font-size, còn màu vẫn lấy từ luật p. Nhiều luật có thể cùng áp vào một thẻ.' }
+      ],
+      next: '../step3-text/index.html'
+    });
+  </script>
+</body>
+</html>

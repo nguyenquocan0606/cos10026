@@ -1,0 +1,14 @@
+/* ============ Step 1 – External CSS ============ */
+
+/* TODO 4: viết luật cho h1 có màu chữ green */
+
+
+
+/* ĐỪNG SỬA 2 luật dưới đây, chúng dùng để test thứ tự ưu tiên */
+h2 {
+  color: green;
+}
+
+p {
+  color: green;
+}

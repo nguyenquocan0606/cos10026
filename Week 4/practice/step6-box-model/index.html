@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Step 6 – Box Model</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Chỉ sửa style.css -->
+
+  <h1>Box Model: Padding, Border, Margin</h1>
+
+  <div class="area">
+    <div class="box">Hộp 1: tôi là content</div>
+  </div>
+
+  <div class="area">
+    <div class="box2">Hộp 2: padding viết tắt</div>
+  </div>
+
+  <div class="area">
+    <div class="box3">Hộp 3: margin từng phía</div>
+  </div>
+
+
+  <!-- ===== Bộ chấm tự động, KHÔNG cần sửa phần dưới ===== -->
+  <script src="../checker.js"></script>
+  <script>
+    setupChecker({
+      title: 'Step 6 – Box Model',
+      theory: `
+        <p>Mỗi phần tử là một <b>hộp quà</b>, đi từ trong ra ngoài:</p>
+        <pre>┌──────────── margin ────────────┐  khoảng cách với hộp khác
+│ ┌────────── border ──────────┐ │  lớp giấy gói
+│ │ ┌──────── padding ───────┐ │ │  lớp xốp chống sốc
+│ │ │        CONTENT         │ │ │  món quà
+│ │ └────────────────────────┘ │ │
+│ └────────────────────────────┘ │
+└────────────────────────────────┘</pre>
+        <p>📏 <b>Chiều rộng thật trên màn hình</b> (mặc định):<br>
+        <code>width + padding×2 + border×2</code> (margin không tính vào hộp)</p>
+        <p><b>Viết tắt</b> (đi theo chiều kim đồng hồ: Trên → Phải → Dưới → Trái):</p>
+        <pre>padding: 20px;               → cả 4 phía 20
+padding: 10px 40px;          → trên/dưới 10, trái/phải 40
+padding: 5px 10px 15px 20px; → trên phải dưới trái</pre>
+        <p>Hoặc từng phía: <code>margin-top</code>, <code>margin-right</code>, <code>margin-bottom</code>, <code>margin-left</code></p>
+        <p>💡 Nền (background) tô cả phần padding, nhưng KHÔNG tô margin.</p>`,
+      tests: [
+        { task: '<code>.box</code>: width <b>200px</b>',
+          check: cssIs('.box', 'width', '200px') },
+        { task: '<code>.box</code>: padding <b>20px</b> (cả 4 phía)',
+          check: all(cssIs('.box', 'paddingTop', '20px'), cssIs('.box', 'paddingLeft', '20px')) },
+        { task: '<code>.box</code>: border <b>5px solid green</b>',
+          check: all(cssIs('.box', 'borderTopWidth', '5px'), cssIs('.box', 'borderTopStyle', 'solid'), cssIs('.box', 'borderTopColor', 'green')) },
+        { task: '<code>.box</code>: margin <b>30px</b>',
+          check: all(cssIs('.box', 'marginTop', '30px'), cssIs('.box', 'marginLeft', '30px')) },
+        { task: '🧮 Kiểm tra: tổng chiều rộng thật của .box phải là <b>250px</b>',
+          check: widthIs('.box', 250),
+          hint: '200 (width) + 20×2 (padding) + 5×2 (border) = 250. Margin không tính!' },
+        { task: '<code>.box2</code>: dùng <b>một dòng</b> padding để trên/dưới 10px, trái/phải 40px',
+          check: all(cssIs('.box2', 'paddingTop', '10px'), cssIs('.box2', 'paddingBottom', '10px'), cssIs('.box2', 'paddingLeft', '40px'), cssIs('.box2', 'paddingRight', '40px')),
+          hint: '<code>padding: 10px 40px;</code>' },
+        { task: '<code>.box3</code>: chỉ margin-left <b>100px</b> (các phía khác giữ 0)',
+          check: all(cssIs('.box3', 'marginLeft', '100px'), cssIs('.box3', 'marginTop', '0px')) },
+        { manual: true,
+          task: 'Bấm F12 → chọn .box → tab <b>Computed</b>. Kéo lên đầu sẽ thấy sơ đồ hộp nhiều màu. Chỉ ra đâu là margin, border, padding, content',
+          hint: 'Cam = margin, vàng = border, xanh lá = padding, xanh dương = content.' },
+        { manual: true,
+          task: 'Thử thêm <code>box-sizing: border-box;</code> vào .box rồi reload. Chiều rộng thật còn là 250px không?',
+          hint: 'Không, nó thành 200px. Với border-box, width đã bao gồm luôn padding và border. Thử xong nhớ xoá dòng đó để test 🧮 lại pass.' }
+      ],
+      next: '../step7-navbar/index.html'
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Step 4 – Colours</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Chỉ sửa style.css -->
+
+  <h1>Màu sắc trong CSS</h1>
+
+  <h2>1. Bốn cách viết màu</h2>
+  <div class="swatch c-name">Tên màu</div>
+  <div class="swatch c-rgb">RGB</div>
+  <div class="swatch c-hex">HEX</div>
+  <div class="swatch c-hsl">HSL</div>
+
+  <h2>2. Trong suốt với RGBA</h2>
+  <div class="rgba-wrap">
+    <div class="c-rgba">Nền đỏ trong suốt 50%, bạn sẽ nhìn xuyên thấy sọc phía sau</div>
+  </div>
+
+  <h2>3. Gradient</h2>
+  <div class="linear">linear-gradient</div>
+  <div class="radial">radial-gradient</div>
+
+  <h2>4. Hover</h2>
+  <button>Di chuột vào tôi</button>
+  <div class="hover-box">Di chuột vào hộp này</div>
+
+
+  <!-- ===== Bộ chấm tự động, KHÔNG cần sửa phần dưới ===== -->
+  <script src="../checker.js"></script>
+  <script>
+    setupChecker({
+      title: 'Step 4 – Colours',
+      theory: `
+        <p><b>4 cách viết cùng một màu đỏ:</b></p>
+        <pre>red                  → tên màu
+rgb(255, 0, 0)       → Red, Green, Blue (mỗi số 0–255)
+#ff0000              → HEX: ff=R, 00=G, 00=B
+hsl(0, 100%, 50%)    → Hue (0–360°), Saturation, Lightness</pre>
+        <p><b>HEX đọc thế nào?</b> Chia thành 3 cặp <code>#RR GG BB</code>. Mỗi cặp từ <code>00</code> (0) đến <code>ff</code> (255).</p>
+        <p><b>Hue</b> là góc trên vòng màu: 0 = đỏ, 120 = xanh lá, 240 = xanh dương.</p>
+        <p><b>RGBA</b>: thêm kênh a (alpha) để chỉnh độ trong suốt, từ 0 (trong suốt hẳn) đến 1 (đặc).</p>
+        <pre>rgba(255, 0, 0, 0.5)   → đỏ, trong suốt 50%</pre>
+        <p><b>Gradient</b> dùng thuộc tính <code>background</code>, không phải background-color:</p>
+        <pre>background: linear-gradient(to right, red, yellow);
+background: radial-gradient(circle, red, yellow);</pre>
+        <p><b>Hover</b>: thêm <code>:hover</code> sau selector</p>
+        <pre>button:hover { background-color: green; }</pre>`,
+      tests: [
+        { task: '<code>.c-name</code>: nền <b>orange</b> (dùng tên màu)',
+          check: cssIs('.c-name', 'backgroundColor', 'orange') },
+        { task: '<code>.c-rgb</code>: nền <b>rgb(0, 128, 255)</b>',
+          check: cssIs('.c-rgb', 'backgroundColor', 'rgb(0, 128, 255)') },
+        { task: '<code>.c-hex</code>: nền <b>#8e44ad</b> (màu tím)',
+          check: cssIs('.c-hex', 'backgroundColor', '#8e44ad') },
+        { task: '<code>.c-hsl</code>: nền <b>hsl(120, 100%, 25%)</b>',
+          check: cssIs('.c-hsl', 'backgroundColor', 'hsl(120, 100%, 25%)'),
+          hint: 'Trình duyệt luôn đổi mọi màu về dạng rgb(). hsl(120,100%,25%) sẽ hiện là rgb(0, 128, 0).' },
+        { task: '<code>.c-rgba</code>: nền <b>rgba(255, 0, 0, 0.5)</b>',
+          check: cssIs('.c-rgba', 'backgroundColor', 'rgba(255, 0, 0, 0.5)') },
+        { task: '<code>.linear</code>: gradient thẳng từ <b>red</b> sang <b>yellow</b>, hướng <b>to right</b>',
+          check: all(cssHas('.linear', 'backgroundImage', 'linear-gradient'), cssHas('.linear', 'backgroundImage', 'to right')),
+          hint: '<code>background: linear-gradient(to right, red, yellow);</code>' },
+        { task: '<code>.radial</code>: gradient tròn (<b>circle</b>) từ red sang yellow',
+          check: all(cssHas('.radial', 'backgroundImage', 'radial-gradient'), cssHas('.radial', 'backgroundImage', 'circle')),
+          hint: '<code>background: radial-gradient(circle, red, yellow);</code>' },
+        { task: '<code>button</code>: nền blue, chữ white, padding 10px',
+          check: all(cssIs('button', 'backgroundColor', 'blue'), cssIs('button', 'color', 'white'), cssIs('button', 'paddingTop', '10px')) },
+        { manual: true,
+          task: 'Di chuột vào nút: nền chuyển <b>green</b>, chữ chuyển <b>black</b>',
+          hint: '<code>button:hover { background-color: green; color: black; }</code>' },
+        { manual: true,
+          task: 'Di chuột vào <code>.hover-box</code>: nền từ lightblue chuyển sang <b>lightcoral</b>',
+          hint: 'Cần 2 luật: <code>.hover-box</code> và <code>.hover-box:hover</code>' },
+        { manual: true,
+          task: 'Câu hỏi: <code>#00ff00</code> là màu gì? Còn <code>rgb(0, 0, 0)</code>?',
+          hint: '#00ff00: R=0, G=255, B=0 → xanh lá. rgb(0,0,0): không có ánh sáng nào → đen.' }
+      ],
+      next: '../step5-background-image/index.html'
+    });
+  </script>
+</body>
+</html>

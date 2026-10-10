@@ -1,0 +1,24 @@
+/* ============ Step 3 – Font, Text Align, Border ============ */
+
+/* TODO 1: body dùng font 'Times New Roman', Arial, sans-serif */
+
+
+/* TODO 2: căn lề cho .center, .right, .justify */
+
+
+/* TODO 3: viền cho 4 hộp
+   .box-solid  → 3px solid  #4CAF50
+   .box-dashed → 2px dashed #FF5733
+   .box-dotted → 2px dotted #0000FF
+   .box-double → 3px double #FF1493  */
+
+
+/* Gợi ý thêm (không bắt buộc): cho các hộp có khoảng cách để dễ nhìn
+   (bạn sẽ học padding/margin ở Step 6) */
+.box-solid, .box-dashed, .box-dotted, .box-double {
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+/* TODO 4: .styled → font Arial, cỡ 18px, đậm, màu #4CAF50 */
+

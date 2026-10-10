@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Step 3 – Font, Text Align, Border</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Chỉ sửa style.css -->
+
+  <h1>Font, căn lề và viền</h1>
+
+  <h2>1. Text align</h2>
+  <p class="left">Tôi căn trái (mặc định)</p>
+  <p class="center">Tôi phải được căn giữa</p>
+  <p class="right">Tôi phải được căn phải</p>
+  <p class="justify">
+    Tôi phải được căn đều hai bên (justify). Câu này cần đủ dài thì mới thấy được hiệu ứng justify:
+    các từ sẽ được giãn ra sao cho mỗi dòng chạm đều cả mép trái lẫn mép phải của khung chứa, giống như
+    trong sách báo. Hãy thu nhỏ cửa sổ trình duyệt để thấy rõ hơn sự khác biệt so với căn trái.
+  </p>
+
+  <h2>2. Border</h2>
+  <div class="box-solid">Viền liền màu xanh lá (solid)</div>
+  <div class="box-dashed">Viền gạch màu cam (dashed)</div>
+  <div class="box-dotted">Viền chấm màu xanh dương (dotted)</div>
+  <div class="box-double">Viền đôi màu hồng (double)</div>
+
+  <h2>3. Font styling</h2>
+  <p class="styled">Chữ Arial, 18px, đậm, màu xanh lá</p>
+
+
+  <!-- ===== Bộ chấm tự động, KHÔNG cần sửa phần dưới ===== -->
+  <script src="../checker.js"></script>
+  <script>
+    setupChecker({
+      title: 'Step 3 – Font, Align, Border',
+      theory: `
+        <p><b>font-family</b>: liệt kê nhiều font, trình duyệt dùng font đầu tiên mà máy có. Font có dấu cách phải để trong nháy:</p>
+        <pre>font-family: 'Times New Roman', Arial, sans-serif;</pre>
+        <p><code>sans-serif</code> ở cuối là "phương án dự phòng" mà máy nào cũng có.</p>
+        <p><b>text-align</b>: <code>left</code> | <code>center</code> | <code>right</code> | <code>justify</code></p>
+        <p><b>border</b> viết tắt 3 phần: <b>độ dày, kiểu, màu</b></p>
+        <pre>border: 3px solid #4CAF50;
+        ↑    ↑      ↑
+     width style  color</pre>
+        <p>Kiểu viền: <code>solid</code> liền, <code>dashed</code> gạch, <code>dotted</code> chấm, <code>double</code> đôi.</p>
+        <p><b>Font:</b> <code>font-size</code> (cỡ), <code>font-weight</code> (độ đậm: normal / bold), <code>color</code> (màu chữ).</p>`,
+      tests: [
+        { task: '<code>body</code> dùng font <code>\'Times New Roman\', Arial, sans-serif</code>',
+          check: all(cssHas('body', 'fontFamily', 'Times New Roman'), cssHas('body', 'fontFamily', 'Arial'), cssHas('body', 'fontFamily', 'sans-serif')),
+          hint: 'Nhớ đặt Times New Roman trong dấu nháy vì tên có dấu cách.' },
+        { task: '<code>.center</code> căn giữa',
+          check: cssIs('.center', 'textAlign', 'center') },
+        { task: '<code>.right</code> căn phải',
+          check: cssIs('.right', 'textAlign', 'right') },
+        { task: '<code>.justify</code> căn đều hai bên',
+          check: cssIs('.justify', 'textAlign', 'justify') },
+        { task: '<code>.box-solid</code>: viền <b>3px solid #4CAF50</b>',
+          check: all(cssIs('.box-solid', 'borderTopWidth', '3px'), cssIs('.box-solid', 'borderTopStyle', 'solid'), cssIs('.box-solid', 'borderTopColor', '#4CAF50')),
+          hint: '<code>border: 3px solid #4CAF50;</code>' },
+        { task: '<code>.box-dashed</code>: viền <b>2px dashed #FF5733</b>',
+          check: all(cssIs('.box-dashed', 'borderTopWidth', '2px'), cssIs('.box-dashed', 'borderTopStyle', 'dashed'), cssIs('.box-dashed', 'borderTopColor', '#FF5733')) },
+        { task: '<code>.box-dotted</code>: viền <b>2px dotted #0000FF</b>',
+          check: all(cssIs('.box-dotted', 'borderTopWidth', '2px'), cssIs('.box-dotted', 'borderTopStyle', 'dotted'), cssIs('.box-dotted', 'borderTopColor', '#0000FF')) },
+        { task: '<code>.box-double</code>: viền <b>3px double #FF1493</b>',
+          check: all(cssIs('.box-double', 'borderTopWidth', '3px'), cssIs('.box-double', 'borderTopStyle', 'double'), cssIs('.box-double', 'borderTopColor', '#FF1493')) },
+        { task: '<code>.styled</code>: font Arial, 18px, bold, màu #4CAF50',
+          check: all(cssHas('.styled', 'fontFamily', 'Arial'), cssIs('.styled', 'fontSize', '18px'), cssIs('.styled', 'fontWeight', '700'), cssIs('.styled', 'color', '#4CAF50')),
+          hint: 'Cần 4 dòng: font-family, font-size, font-weight, color. Trình duyệt hiển thị bold là 700.' },
+        { manual: true,
+          task: 'Câu hỏi: tại sao .styled dùng font Arial dù body đã đặt Times New Roman?',
+          hint: 'Vì font-family được <b>kế thừa</b> (inherit) từ cha xuống con, nhưng luật đặt thẳng lên .styled cụ thể hơn nên ghi đè giá trị kế thừa.' }
+      ],
+      next: '../step4-colors/index.html'
+    });
+  </script>
+</body>
+</html>

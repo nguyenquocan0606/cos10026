@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Step 1 – Gắn CSS vào HTML</title>
+
+  <!-- TODO 1: Gắn file style.css vào trang này bằng thẻ <link> (viết ngay dưới dòng này) -->
+
+
+  <!-- TODO 2: Tạo thẻ <style> (Internal CSS) ngay dưới thẻ <link>, cho h2 có màu chữ blue -->
+
+
+</head>
+<body>
+  <h1>Tôi là h1: màu của tôi do External CSS (style.css) quyết định</h1>
+
+  <h2>Tôi là h2: External nói green, Internal nói blue. Ai thắng?</h2>
+
+  <!-- TODO 3: Thêm Inline CSS (thuộc tính style) vào thẻ <p> dưới đây để chữ có màu red -->
+  <p>Tôi là p: External nói green, Inline nói red. Ai thắng?</p>
+
+
+  <!-- ===== Bộ chấm tự động, KHÔNG cần sửa phần dưới ===== -->
+  <script src="../checker.js"></script>
+  <script>
+    setupChecker({
+      title: 'Step 1 – Gắn CSS vào HTML',
+      theory: `
+        <p><b>Cú pháp CSS:</b></p>
+        <pre>selector {
+  property: value;
+}</pre>
+        <p><b>3 cách gắn CSS:</b></p>
+        <p>1️⃣ <b>Inline</b>: viết thẳng vào thẻ<br><code>&lt;p style="color: red;"&gt;</code></p>
+        <p>2️⃣ <b>Internal</b>: viết trong <code>&lt;style&gt;</code>, đặt trong <code>&lt;head&gt;</code></p>
+        <p>3️⃣ <b>External</b>: viết trong file .css riêng rồi link vào<br><code>&lt;link rel="stylesheet" href="style.css"&gt;</code></p>
+        <p><b>Thứ tự ưu tiên:</b> External &lt; Internal &lt; Inline.<br>
+        Nếu hai luật mạnh ngang nhau thì luật <b>viết sau</b> thắng (gọi là "cascading").</p>`,
+      tests: [
+        { task: 'TODO 1: Có thẻ <code>&lt;link&gt;</code> gắn file <code>style.css</code>',
+          check: exists('link[rel="stylesheet"][href="style.css"]'),
+          hint: 'Viết trong &lt;head&gt;: <code>&lt;link rel="stylesheet" href="style.css"&gt;</code>' },
+        { task: 'TODO 4 (trong style.css): <code>h1</code> có màu chữ <b>green</b>',
+          check: cssIs('h1', 'color', 'green'),
+          hint: 'Mở style.css và viết: <code>h1 { color: green; }</code>. Bạn cần làm TODO 1 trước, nếu chưa link thì style.css không có tác dụng.' },
+        { task: 'TODO 2: <code>h2</code> có màu <b>blue</b> (Internal thắng External)',
+          check: cssIs('h2', 'color', 'blue'),
+          hint: 'Trong &lt;head&gt;, đặt <code>&lt;style&gt; h2 { color: blue; } &lt;/style&gt;</code> <b>SAU</b> thẻ &lt;link&gt;. Nếu đặt TRƯỚC thì External viết sau sẽ thắng.' },
+        { task: 'TODO 3: <code>p</code> có màu <b>red</b> (Inline thắng tất cả)',
+          check: cssIs('p', 'color', 'red'),
+          hint: '<code>&lt;p style="color: red;"&gt;</code>' },
+        { manual: true,
+          task: 'Thí nghiệm: chuyển thẻ &lt;style&gt; lên TRÊN thẻ &lt;link&gt; rồi reload. h2 đổi sang màu gì? Vì sao?',
+          hint: 'Đáp án: green. External và Internal thật ra mạnh ngang nhau, nên cái nào viết sau thì thắng. Thử xong nhớ chuyển lại như cũ.' },
+        { manual: true,
+          task: 'Bấm F12 → chọn thẻ h2 → tab <b>Styles</b>. Bạn có thấy luật <code>color: green</code> bị gạch ngang không?',
+          hint: 'DevTools gạch ngang những luật bị luật khác ghi đè. Đây là cách debug CSS tốt nhất!' }
+      ],
+      next: '../step2-selectors/index.html'
+    });
+  </script>
+</body>
+</html>

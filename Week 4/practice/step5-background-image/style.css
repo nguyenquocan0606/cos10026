@@ -1,0 +1,24 @@
+/* ============ Step 5 – Background Image ============ */
+
+/* Phần có sẵn, ĐỪNG SỬA: cho các hộp nhỏ có chiều cao + viền */
+.box {
+  height: 160px;
+  border: 1px solid #999;
+}
+
+
+/* TODO 1: .hero
+   - ảnh nền images/landscape.svg
+   - cao 300px
+   - phủ kín (cover)
+   - căn giữa (center)          */
+
+
+/* TODO 2: .tiles → ảnh nền images/tile.svg (không cần làm gì thêm, mặc định sẽ lặp) */
+
+
+/* TODO 3: .no-repeat → ảnh tile.svg, không lặp, kích thước 100px 100px */
+
+
+/* TODO 4: .repeat-x → ảnh tile.svg, chỉ lặp theo chiều ngang */
+
